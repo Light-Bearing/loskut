@@ -1,30 +1,54 @@
-const PATH = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-var debug = process.env.NODE_ENV !== 'production';
+var webpack = require('webpack');
 
 module.exports = {
-    devtool: debug ? 'source-map' : undefined,
-    entry: './src/index.js',
+    entry: "./src/index.js",
     output: {
-        path: PATH.join(__dirname,'/dist'),
-        filename:'index_bundle.js',
+        path: __dirname + '/public/build/',
+        publicPath: "build/",
+        filename: "bundle.js"
     },
     module: {
-        rules: [
+        loaders: [
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader'
-                }
+                loader: "babel",
+                exclude: [/node_modules/, /public/]
+            },
+            {
+                test: /\.css$/,
+                loader: "style-loader!css-loader!autoprefixer-loader",
+                exclude: [/node_modules/, /public/]
+            },
+            {
+                test: /\.less$/,
+                loader: "style-loader!css-loader!autoprefixer-loader!less",
+                exclude: [/node_modules/, /public/]
+            },
+            {
+                test: /\.gif$/,
+                loader: "url-loader?limit=10000&mimetype=image/gif"
+            },
+            {
+                test: /\.jpg$/,
+                loader: "url-loader?limit=10000&mimetype=image/jpg"
+            },
+            {
+                test: /\.png$/,
+                loader: "url-loader?limit=10000&mimetype=image/png"
+            },
+            {
+                test: /\.svg/,
+                loader: "url-loader?limit=26000&mimetype=image/svg+xml"
+            },
+            {
+                test: /\.jsx$/,
+                loader: "react-hot!babel",
+                exclude: [/node_modules/, /public/]
+            },
+            {
+                test: /\.json$/,
+                loader: "json-loader"
             }
         ]
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: './src/index.html'
-        }
-        )
-    ]
+    }
 }
