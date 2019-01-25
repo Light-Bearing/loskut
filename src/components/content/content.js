@@ -8,48 +8,51 @@ class Content extends Component{
     constructor (props){
         super(props);
         this.state = {
+            data1: data.properties,
             properties: data.properties,
-            property: data.properties[0],
-        }
+            // property: data.properties[3%data.properties.length],
+        };
+        this.currentIndex = 3;
+    }
+
+    shiftArray (arr, cnt) {
+        return arr.slice(cnt).concat(arr.slice(0,cnt));
     }
 
     nextProperty () {
-        const newIndex = this.state.property.index+1;
-        this.setState({
-            property:data.properties[newIndex]
-        })
+        let arr1 = this.state.data1.slice();
+        arr1 = this.shiftArray(arr1, 1) 
+        this.setState({data1:arr1})
     }
 
     prevProperty () {
-        const newIndex = this.state.property.index-1;
-        this.setState({
-            property:data.properties[newIndex]
-        })
+        let arr1 = this.state.data1.slice();
+        arr1 = this.shiftArray(arr1, -1) 
+        this.setState({data1:arr1})
     }
 
     render() {
         const {properties,property} = this.state;
         return (
             <div className="sliderApp">
-                <button
-                    onClick={()=>this.nextProperty()}
-                    disabled = {property.index === data.properties.length -1}
-            >Следущая</button>
-                <button
-                    onClick={()=>this.prevProperty()}
-                    disabled = {property.index === 0}
-            >Предыдущая</button>
-                <div className="col">
-                    <div  className={`cards-slider active-slide-${property.index}`}>
-                        <div className="cards-slider-wrapper" style={{
-                            'transform': `translateX(-${property.index*(100/properties.length)}%)`
-                        }}>
-                            {
-                                properties.map(property=>  <Card key={property.id} property={property} />)
-                            }
+                <button class="arrow prev"   onClick={()=>this.prevProperty()} >⇦</button>
+                <button class="arrow next"onClick={()=>this.nextProperty()}>⇨</button>
+                <div className="carusel">
+                    <div className="col">
+                        <div  className={`cards-slider active-slide-3`}>
+                            <div className="cards-slider-wrapper"
+                             style={{
+                                'transform': `translateX(-${Math.floor(properties.length/2)*(100/properties.length)}%)`
+                            }}
+                            >
+                                {
+                                    this.state.data1.map((property,positions)=>  <Card key={property.id} property={property} center ={Math.floor(properties.length/2)} position= {positions}/>)
+                                }
+                            </div>
                         </div>
-                    </div>                
+                    </div>
                 </div>
+                
             </div>
         )
     }

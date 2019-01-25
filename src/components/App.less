@@ -1,9 +1,50 @@
 @import './styles/palete.less';
 
-body {
-    margin: 0;
+*, *:after, *:before {
+    box-sizing: border-box;
     padding: 0;
+    margin: 0;
+    transition: .5s ease-in-out; /* добавим плавность переходов для всех элементов страницы*/
+}
+a {
+    text-decoration: none;
+    outline: none;
+    color: @text-color;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display';
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+body {
+    // margin: 0;
+    // padding: 0;
     background-color: @backround-color;
+    // color:@additional-text-color;
+
+    font-family: 'Open Sans', arial, sans-serif;
+    font-size: 14px;
+    line-height: 1;
+    color: #373737;
+}
+
+/* добавим очистку потока для всех контейнеров, внутри которых задано обтекание дочерних элементов */
+header:after, .container:after, footer:after, .widget-posts-list li:after, #subscribe:after {
+    content: "";
+    display: table;
+    clear: both;
+    } 
+    /* стилевой класс, который управляет шириной контейнера сетки*/
+    .container {
+    margin: 10px auto;
+    width: 100%;
+    max-width: 960px;
+    padding: 1 15px;
+    } 
+
+h2 {
+    color: @text-color;
 }
 
 .cards-slider-wrapper{
@@ -16,40 +57,24 @@ body {
         opacity: 0.5;
         transform: scale(0.7);
         transition: opasity 300ms linear,transform 300ms cubic-bezier(0.455, 0.03,0.515, 0.955);;
-
     }
 }
 
-.cards-slider.active-slide-0 #card-0{
-    opacity: 1;
-    transform: scale(1);
-}
 .cards-slider.active-slide-1 #card-1{
     opacity: 1;
     transform: scale(1);
 }
-.cards-slider.active-slide-2 #card-2{
-    opacity: 1;
-    transform: scale(1);
-}
+
 .cards-slider.active-slide-3 #card-3{
-    opacity: 1;
-    transform: scale(1);
-}
-.cards-slider.active-slide-4 #card-4{
-    opacity: 1;
-    transform: scale(1);
-}
-.cards-slider.active-slide-5 #card-5{
     opacity: 1;
     transform: scale(1);
 }
 
 .col {
-    height: 264px;
+    height: 274px;
     position: relative;
-    &:before,
-    &:after{
+
+&:before ,&:after{
         content: '';
         display: block;
         width: 50%;
@@ -59,7 +84,7 @@ body {
         top: 0;
         left: 0;
         z-index: 1;
-    }
+    };
     &:after{
         left: auto;
         right: 0;
@@ -71,7 +96,6 @@ body {
     position: relative;
     max-width: 200px;
     margin: 0 auto;
-
     &:after {
         content: "";
         display: block;
@@ -82,4 +106,10 @@ body {
         top: 0;
         left: 0;
     }
+}
+
+.contact {
+    position: absolute;
+    top: 5px;
+    left: 250px;
 }

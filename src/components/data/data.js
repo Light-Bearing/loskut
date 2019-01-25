@@ -34,15 +34,16 @@ const data = {
             price: 150,
             name: 'па654654564ртьера',
             picture: '../image/img5.jpg'
-        },
-        {
-            id: '6',
-            index: 5,
-            price: 250,
-            name: 'фетр',
-            picture: '../image/img6.jpg'
         }
     ]
 }
 
+/*
+{
+    id: '6',
+    index: 5,
+    price: 250,
+    name: 'фетр',
+    picture: '../image/img6.jpg'
+}*/
 export default data;
