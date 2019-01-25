@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-
+import Slider from "react-slick";
 import data from '../data/data';
 import Card from './card';
 
@@ -14,45 +14,22 @@ class Content extends Component{
         };
         this.currentIndex = 3;
     }
-
-    shiftArray (arr, cnt) {
-        return arr.slice(cnt).concat(arr.slice(0,cnt));
-    }
-
-    nextProperty () {
-        let arr1 = this.state.data1.slice();
-        arr1 = this.shiftArray(arr1, 1) 
-        this.setState({data1:arr1})
-    }
-
-    prevProperty () {
-        let arr1 = this.state.data1.slice();
-        arr1 = this.shiftArray(arr1, -1) 
-        this.setState({data1:arr1})
-    }
-
     render() {
         const {properties,property} = this.state;
+
+        const settings = {
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1
+          };
         return (
-            <div className="sliderApp">
-                <button class="arrow prev"   onClick={()=>this.prevProperty()} >⇦</button>
-                <button class="arrow next"onClick={()=>this.nextProperty()}>⇨</button>
-                <div className="carusel">
-                    <div className="col">
-                        <div  className={`cards-slider active-slide-3`}>
-                            <div className="cards-slider-wrapper"
-                             style={{
-                                'transform': `translateX(-${Math.floor(properties.length/2)*(100/properties.length)}%)`
-                            }}
-                            >
-                                {
-                                    this.state.data1.map((property,positions)=>  <Card key={property.id} property={property} center ={Math.floor(properties.length/2)} position= {positions}/>)
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+            <div>
+                <h2> Примеры товара:</h2>
+                <Slider {...settings}>
+                    {this.state.data1.map((property,positions)=> <div> <Card key={property.id} property={property} /></div>)}
+                </Slider>
             </div>
         )
     }
