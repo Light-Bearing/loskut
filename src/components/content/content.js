@@ -3,6 +3,9 @@ import Slider from "react-slick";
 import data from '../data/data';
 import Card from './card';
 
+// import "~slick-carousel/slick/slick.css"; 
+// import "~slick-carousel/slick/slick-theme.css";
+
 class Content extends Component{
 
     constructor (props){
@@ -28,7 +31,7 @@ class Content extends Component{
             <div>
                 <h2> Примеры товара:</h2>
                 <Slider {...settings}>
-                    {this.state.data1.map((property,positions)=> <div> <Card key={property.id} property={property} /></div>)}
+                    {this.state.data1.map((property,positions)=> <div> <h3>{positions}</h3></div>)}
                 </Slider>
             </div>
         )
